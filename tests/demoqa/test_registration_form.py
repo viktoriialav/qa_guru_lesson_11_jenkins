@@ -18,7 +18,7 @@ def test_demoqa_student_registration_form(setup_browser):
     date_of_birth = date(1993, 5, 17)
     user_subjects = 'Chemistry'
     user_hobbies = 'Sports'
-    # user_picture='photo.png'
+    user_picture='photo.png'
     user_current_address = '144 Broadway, suit 12'
     user_state = 'NCR'
     user_city = 'Gurgaon'
@@ -63,13 +63,13 @@ def test_demoqa_student_registration_form(setup_browser):
 
     with allure.step('Check form results'):
         browser.element('#example-modal-sizes-title-lg').should(have.text('Thanks for submitting the form'))
-        # browser.element('.table').all('td').even.should(have.exact_texts('Viktoriia Lav',
-        #                                                                  'newuser@gmail.com',
-        #                                                                  'Female',
-        #                                                                  '8800222334',
-        #                                                                  '17 May,1993',
-        #                                                                  'Chemistry',
-        #                                                                  'Sports',
-        #                                                                  'photo.png',
-        #                                                                  '144 Broadway, suit 12',
-        #                                                                  'NCR Gurgaon'))
+        browser.element('.table').all('td').even.should(have.exact_texts(f'{first_name} {last_name}',
+                                                                         user_email,
+                                                                         user_gender,
+                                                                         user_number,
+                                                                         date_of_birth.strftime('%d %B,%Y'),
+                                                                         user_subjects,
+                                                                         user_hobbies,
+                                                                         user_picture,
+                                                                         user_current_address,
+                                                                         f'{user_state} {user_city}'))
