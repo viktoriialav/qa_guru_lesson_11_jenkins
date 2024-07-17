@@ -24,8 +24,12 @@ def test_demoqa_student_registration_form(setup_browser):
     with allure.step('Open registration form'):
         browser.open('/automation-practice-form')
         browser.element('.practice-form-wrapper').should(have.text("Student Registration Form"))
-        browser.driver.execute_script("$('footer').remove()")
-        browser.driver.execute_script("$('#fixedban').remove()")
+        # browser.driver.execute_script("$('footer').remove()")
+        # browser.driver.execute_script("$('#fixedban').remove()")
+        browser.all('[id^=google_ads][id$=container__]').with_(timeout=10).wait_until(
+            have.size_greater_than_or_equal(3)
+        )
+        browser.all('[id^=google_ads][id$=container__]').perform(command.js.remove)
 
     with allure.step('Fill form'):
         browser.element('#firstName').type(first_name)
@@ -42,6 +46,7 @@ def test_demoqa_student_registration_form(setup_browser):
         # browser.all('[for^=hobbies-checkbox]').element_by(have.exact_text('Reading')).click()
 
         browser.element('#currentAddress').set_value(user_current_address)
+        browser.element('#state').perform(command.js.scroll_into_view)
         browser.element('#state').click()
         browser.all('[id^=react-select][id*=option]').element_by(have.exact_text(user_state)).click()
         browser.element('#city').click()
