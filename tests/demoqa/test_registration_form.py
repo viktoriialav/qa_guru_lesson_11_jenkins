@@ -22,7 +22,7 @@ def test_demoqa_student_registration_form(setup_browser):
 
 
     with allure.step('Open registration form'):
-        browser.open('https://demoqa.com/automation-practice-form')
+        browser.open('/automation-practice-form')
         browser.element('.practice-form-wrapper').should(have.text("Student Registration Form"))
         browser.driver.execute_script("$('footer').remove()")
         browser.driver.execute_script("$('#fixedban').remove()")
