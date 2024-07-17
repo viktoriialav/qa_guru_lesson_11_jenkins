@@ -24,8 +24,12 @@ def test_demoqa_student_registration_form(setup_browser):
     with allure.step('Open registration form'):
         browser.open('/automation-practice-form')
         browser.element('.practice-form-wrapper').should(have.text("Student Registration Form"))
-        browser.driver.execute_script("$('footer').remove()")
-        browser.driver.execute_script("$('#fixedban').remove()")
+        # browser.driver.execute_script("$('footer').remove()")
+        # browser.driver.execute_script("$('#fixedban').remove()")
+        browser.all('[id^=google_ads][id$=container__]').with_(timeout=10).wait_until(
+            have.size_greater_than_or_equal(3)
+        )
+        browser.all('[id^=google_ads][id$=container__]').perform(command.js.remove)
 
     with allure.step('Fill form'):
         browser.element('#firstName').type(first_name)
