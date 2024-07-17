@@ -1,8 +1,11 @@
+import os
 from datetime import date
 
 import allure
 from selene import browser, have, command
 from selenium.webdriver.common.keys import Keys
+
+import tests
 
 
 @allure.title('Successful fill form')
@@ -52,9 +55,9 @@ def test_demoqa_student_registration_form(setup_browser):
         browser.element('#city').click()
         browser.all('[id^=react-select][id*=option]').element_by(have.exact_text(user_city)).click()
 
-        # browser.element('#uploadPicture').send_keys(os.path.abspath(
-        #     os.path.join(os.path.dirname(tests.__file__), 'resources/photo.png')
-        # ))
+        browser.element('#uploadPicture').send_keys(os.path.abspath(
+            os.path.join(os.path.dirname(tests.__file__), 'resources/photo.png')
+        ))
 
         browser.element('#submit').click()
 
